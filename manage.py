@@ -1,6 +1,8 @@
+#!/usr/bin/env python3
+
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
-import json, re, base64
+import base64
 
 def authenticate(apiName, apiVersion, apiScope):
     ''' Authenticate the user and returns a service object
@@ -11,7 +13,7 @@ def authenticate(apiName, apiVersion, apiScope):
     found here: https://developers.google.com/identity/protocols/googlescopes '''
 
     #specify service account file (contains service account information)
-    SERVICE_ACCOUNT_FILE = 'manager.json'
+    SERVICE_ACCOUNT_FILE = '../service.json'
     #create a credentials object with the service account file and the specificed scope
     credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=apiScope)
     #build the service object
@@ -29,7 +31,7 @@ def createServiceAccount(service, projectName, userName):
     #request body for the create account method
     request_body = {"serviceAccount": {"displayName": userName,},"accountId": userName}
     #return the newly created service account
-    return service.projects().serviceAccounts().create(name=projectName, body=request_body).execute()
+    return service.projects().serviceAccounts().create(name=generateProjectName(projectName), body=request_body).execute()
 
 def getAllAccounts(service, projectName):
     ''' This gets all the service accounts associated with a projects
@@ -64,12 +66,11 @@ def generateServiceKey(service, serviceAccount):
     #close the file
     outfile.close()
 
-def listServiceKey(service, userName, name, projectName):
+def getServiceKey(service, projectName, userName):
     '''   '''
-    return service.projects().serviceAccounts().keys().list(name=name +
-    '/serviceAccounts/' + userName + '@' + projectName + ".iam.gserviceaccount.com").execute()
+    return service.projects().serviceAccounts().keys().list(name=generateFullEmail(projectName, userName)).execute()
 
-def removeServiceAccount(service, projectName. userName):
+def removeServiceAccount(service, projectName, userName):
     ''' Removes the specified service account
     @service is the authenticated service account
     @projectName should be the name of the project
@@ -108,9 +109,8 @@ def main():
     projectName = 'samaugustynbackup'
 
     service = authenticate(apiName, apiVersion, SCOPES)
-    removeServiceAccount(service, 'samaugustynbackup', 'drive1')
-    #generateServiceKey(service, createServiceAccount(service, projectName, 'drive1'))
-    #print(getServiceAccount(service, 'samaugustynbackup', 'drive1'))
 
+    #generateServiceKey(service, createServiceAccount(service, projectName, 'drive1'))
+    print(getServiceKey(service, 'samaugustynbackup', 'drive2'))
 
 if __name__ == "__main__": main()

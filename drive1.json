@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "samaugustynbackup",
+  "private_key_id": "0d7e8925e1072a22da943930154d3efb730c9035",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC0UnIHIC/+g74Q\nrnmOUTMG1c5rG32EUib7TOaF+f4qpLSswrkguDukAN0jBb0Jnr3xOh7yE04UpG1s\nSXbuDP45CzYM1HjAqaaDNGXhoHa7q396MiFApAIDKnJwJShfbVGGxTcgA8UtUlo8\nlvP6Yy6Z6aETWmy48PiZsZOawy0xr9uXcJdM7XRYmj2oYRUGSwc9E+4Uv6o5dRVB\nwB4ANiytZWnubzD/j8M8ocfWOJz9IMps7CU2mzwgjCTjvPd3GSMOHL+jzmc76RIt\nsepad+g3Ghc9VCmQeGY7aD8wVJNdCAxTWs0BZ+KRJniIdwhf9p1kYqV1j1kfcWI9\nMZD3vWvbAgMBAAECggEACNLH7zIgZxNkARKO5bg/bb3K6rhe1rl8wtGRrhiV2tke\nv7bysneRVrl1sjlqDvoMUHnUx2kxnUnDOO5w7VduN4HyIR3JOTqT6HOitvzQRbQv\nxqqEfTjWCF85V+Q/93tn5wpOlwU+m4GEfNZ+FbbPGItM05+aSYP90uqhG4xVV8r7\nRU18KhOQVlnn02/JHPuYILK+c9N8rvtlMuIyhv2EdiWnKzs4gmn8mHb4CDWqZLeN\nNzl8dA6Q3gRVwyJBkTShURO4l9M2UxyqsGEeMGk1SX4eQ0KiKTk0g34jikxRPdxw\n+S0wpV3h6l3vQSOiPygmoI98+YmFAYhGhUChB350IQKBgQDavvaOyPwwtjdpPNsO\nx+9OMxkbRMyI87wy934Ge+pkMiCyK3aZSb9Fvwf7lYtsjpKcfo8l3nLp/9mB9URT\nZ99tGt9yaOECi2hYTCFBpx/V/qWYJ984DPNqXGPhci+nrTkNZ4rI/fGX71kTzy+d\nfGKJXAZlOA1DsFEBt/W80FyZKQKBgQDTCEAuzhxOwOTPtvJDLDJABlVzatt9zmKv\nRa0ckCOoAFo7F38MMiaH1SEus38opE0z764pqLRt3LbOJWzNS39gfb37jVPqXQyC\nTK5PfOJML28OOKuX9JwfrN0KA4MgErpNDsPlSEP96T8aI+zgBE8fP3dNeV+V6K+G\nTUro/uXJYwKBgFztHQ8BYOlMr3N8j87Srt24pWTJMF7JtFyueRJGGAfip7Mo9aQf\nCSuXAMwm9mjylGP4+9TpkEXKE9u6lwEbsnXGIcCXv2b2VCiWhtY+Ki8dk7l0zsYf\n8lRv1VqTyJzh4MfKAdJq1vRlkKDytlaf3bheqLTdP/1ObMtfG/zPQ1cpAoGBAM3V\nx1yf1waNqOBdTjFsw1qlkuVvvcUY8DKLII2yncS5C0mF4nrP07s7jBEULRxEHbVh\nu5uQnORnmrq50ETxtb01CIB62fXHanMRPhfz9Hpg7c6OQfiGM13F6xdgU56OBb8x\nfqt98CuSPOVPUzUxnscYzVH45929Rq8VZtKaBSGHAoGAZON3+3qlF0uyzBjOYPa6\nQZbfKrD0JqkLZQ7hxYH8F0EEMn+v9Sub48a9VTwqoyu7JnQKzykJszap+6it4W0m\n4/6tNiARBMMldHEFrp6xY+FNxoz0OKixKF0eIiGkmBPwvsxPfv6nAo1iOQ3QKups\nyW/DBQQaphUWy+DMovlHX4k=\n-----END PRIVATE KEY-----\n",
+  "client_email": "drive1@samaugustynbackup.iam.gserviceaccount.com",
+  "client_id": "117755816210153291657",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/drive1%40samaugustynbackup.iam.gserviceaccount.com"
+}
