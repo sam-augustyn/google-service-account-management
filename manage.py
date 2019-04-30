@@ -108,9 +108,11 @@ def removeServiceAccount(service, projectName, userName):
     @userName should be the name of the service account '''
 
     #call the api to delete the specified service account
-    service.projects().serviceAccounts().delete(name=generateFullEmail(projectName, userName)).execute()
+    service.projects().serviceAccounts().delete(name=getFullEmail(projectName, userName)).execute()
 
-
+def removeServiceKey(service, key):
+    ''' Removes a specified key'''
+    service.projects().serviceAccounts().keys().delete(name=key)
 
 def main():
     SCOPES = ['https://www.googleapis.com/auth/cloud-platform']
@@ -120,6 +122,6 @@ def main():
 
     service = authenticate(apiName, apiVersion, SCOPES)
 
-    print(getServiceKeys(service, projectName, 'manager'))
+    #removeServiceKey(service, getServiceKeys(service, projectName, 'manager').get('keys')[1]['name'])
 
 if __name__ == "__main__": main()
