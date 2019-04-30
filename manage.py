@@ -13,7 +13,7 @@ def authenticate(apiName, apiVersion, apiScope):
     found here: https://developers.google.com/identity/protocols/googlescopes '''
 
     #specify service account file (contains service account information)
-    SERVICE_ACCOUNT_FILE = '../service.json'
+    SERVICE_ACCOUNT_FILE = '../manager.json'
     #create a credentials object with the service account file and the specificed scope
     credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=apiScope)
     #build the service object
@@ -21,18 +21,7 @@ def authenticate(apiName, apiVersion, apiScope):
     #return the service object
     return service
 
-def createServiceAccount(service, projectName, userName):
-    ''' This method creates a service account in the specified project with the specified name
-    and returns the service account that was created
-    @service, authenitcated service object
-    @projectName should be the name of the project
-    @userName should be the name of the new service account '''
-
-    #request body for the create account method
-    request_body = {"serviceAccount": {"displayName": userName,},"accountId": userName}
-    #return the newly created service account
-    return service.projects().serviceAccounts().create(name=generateProjectName(projectName), body=request_body).execute()
-
+''' ---GET METHODS--- '''
 def getAllAccounts(service, projectName):
     ''' This gets all the service accounts associated with a projects
     It returns a dictionary of all the accounts
@@ -49,9 +38,54 @@ def getServiceAccount(service, projectName, userName):
     @userName should be the name of the service account'''
 
     #return the service account information
-    return service.projects().serviceAccounts().get(name=generateFullEmail(projectName, userName)).execute()
+    return service.projects().serviceAccounts().get(name=getFullEmail(projectName, userName)).execute()
 
-def generateServiceKey(service, serviceAccount):
+def getServiceKeys(service, projectName, userName):
+    ''' Returns a dictionary of all the service keys for a service account on a project
+    @service is the service object
+    @projectName is the name of the project
+    @userName is the name of the user'''
+
+    #return dictionary witha all of the keys
+    return service.projects().serviceAccounts().keys().list(name=getFullEmail(projectName, userName)).execute()
+
+def getServiceEmail(projectName, userName):
+    ''' Generates the service email with the specified service account
+    @projectName should be the name of the project
+    @userName should be the name of the service account '''
+
+    #return a string with the email of the service account
+    return userName + "@" + projectName + ".iam.gserviceaccount.com"
+
+def getProjectName(projectName):
+    ''' Generate the project name
+    @projectName should be the name of the project '''
+
+    #return a string that is the project name
+    return "projects/" + projectName
+
+def getFullEmail(projectName, userName):
+    ''' Generates the full email used for api calls
+    @projectName should be the name of the project
+    @userName should be the name of the service account '''
+
+    #return the string with the full email used for api calls
+    return getProjectName(projectName) + '/serviceAccounts/' + getServiceEmail(projectName, userName)
+
+''' ---CREATE METHODS--- '''
+def createServiceAccount(service, projectName, userName):
+    ''' This method creates a service account in the specified project with the specified name
+    and returns the service account that was created
+    @service, authenitcated service object
+    @projectName should be the name of the project
+    @userName should be the name of the new service account '''
+
+    #request body for the create account method
+    request_body = {"serviceAccount": {"displayName": userName,},"accountId": userName}
+    #return the newly created service account
+    return service.projects().serviceAccounts().create(name=generateProjectName(projectName), body=request_body).execute()
+
+def createServiceKey(service, serviceAccount):
     ''' Generate a private key for a service account and writes json in the current working directory
     @service, authenticated service object
     @serviceAccount should the service account info generated from the above methods '''
@@ -66,10 +100,7 @@ def generateServiceKey(service, serviceAccount):
     #close the file
     outfile.close()
 
-def getServiceKey(service, projectName, userName):
-    '''   '''
-    return service.projects().serviceAccounts().keys().list(name=generateFullEmail(projectName, userName)).execute()
-
+''' ---DELETION METHODS---'''
 def removeServiceAccount(service, projectName, userName):
     ''' Removes the specified service account
     @service is the authenticated service account
@@ -79,28 +110,7 @@ def removeServiceAccount(service, projectName, userName):
     #call the api to delete the specified service account
     service.projects().serviceAccounts().delete(name=generateFullEmail(projectName, userName)).execute()
 
-def generateServiceEmail(projectName, userName):
-    ''' Generates the service email with the specified service account
-    @projectName should be the name of the project
-    @userName should be the name of the service account '''
 
-    #return a string with the email of the service account
-    return userName + "@" + projectName + ".iam.gserviceaccount.com"
-
-def generateProjectName(projectName):
-    ''' Generate the project name
-    @projectName should be the name of the project '''
-
-    #return a string that is the project name
-    return "projects/" + projectName
-
-def generateFullEmail(projectName, userName):
-    ''' Generates the full email used for api calls
-    @projectName should be the name of the project
-    @userName should be the name of the service account '''
-
-    #return the string with the full email used for api calls
-    return generateProjectName(projectName) + '/serviceAccounts/' + generateServiceEmail(projectName, userName)
 
 def main():
     SCOPES = ['https://www.googleapis.com/auth/cloud-platform']
@@ -110,7 +120,6 @@ def main():
 
     service = authenticate(apiName, apiVersion, SCOPES)
 
-    #generateServiceKey(service, createServiceAccount(service, projectName, 'drive1'))
-    print(getServiceKey(service, 'samaugustynbackup', 'drive2'))
+    print(getServiceKeys(service, projectName, 'manager'))
 
 if __name__ == "__main__": main()
