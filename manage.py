@@ -72,7 +72,8 @@ def getFullEmail(projectName, userName):
     #return the string with the full email used for api calls
     return getProjectName(projectName) + '/serviceAccounts/' + getServiceEmail(projectName, userName)
 
-''' ---CREATE METHODS--- '''
+'''---SERVICE ACCOUNT METHODS ---'''
+
 def createServiceAccount(service, projectName, userName):
     ''' This method creates a service account in the specified project with the specified name
     and returns the service account that was created
@@ -83,7 +84,7 @@ def createServiceAccount(service, projectName, userName):
     #request body for the create account method
     request_body = {"serviceAccount": {"displayName": userName,},"accountId": userName}
     #return the newly created service account
-    return service.projects().serviceAccounts().create(name=generateProjectName(projectName), body=request_body).execute()
+    return service.projects().serviceAccounts().create(name=getProjectName(projectName), body=request_body).execute()
 
 def createServiceKey(service, serviceAccount):
     ''' Generate a private key for a service account and writes json in the current working directory
@@ -121,7 +122,6 @@ def main():
     projectName = 'samaugustynbackup'
 
     service = authenticate(apiName, apiVersion, SCOPES)
-
     #removeServiceKey(service, getServiceKeys(service, projectName, 'manager').get('keys')[1]['name'])
 
 if __name__ == "__main__": main()
